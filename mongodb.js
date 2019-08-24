@@ -15,27 +15,11 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
 
     const db = client.db(databaseName);
 
-    // db.collection('users').findOne({ _id: new ObjectID('5d59addae2150d2ef8241bb1') }, (error, user) => {
-    //     if (error) {
-    //         return console.log('Unable to fetch');
-    //     }
-
-    //     console.log(user);
-    // });
-
-    db.collection('users').find({ age: '31' }).toArray((error, users) => {
-        if (error) {
-            console.log('Unable to retrieve users');
-        }
-
-        console.log(users);
-    });
-
-    db.collection('users').find({ age: '31' }).count((error, count) => {
-        if (error) {
-            console.log('Unable to retrieve users');
-        }
-
-        console.log(count);
-    });
+    db.collection('tasks').deleteOne({
+        description: 'a description'
+    }).then((result) => {
+        console.log(result);
+    }).catch((error) => {
+        console.log(error);
+    })
 });
